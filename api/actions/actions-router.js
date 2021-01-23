@@ -14,7 +14,9 @@ router.get("/", (req, res) => {
   ActionModel.get(req.params.id)
     .then((actions) => {
       if (actions) {
-        res.status(200).json(actions);
+        res
+          .status(200)
+          .json([{ message: "List of Actions", Action_List: actions }]);
       } else {
         res.status(404).json({ message: `can't retrieve list of actions` });
       }
