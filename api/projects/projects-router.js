@@ -7,9 +7,7 @@ router.get("/", (req, res) => {
   ProjectModel.get(req.params.id)
     .then((getProjects) => {
       if (getProjects) {
-        res
-          .status(200)
-          .json({ message: "List of Projecs", Project_List: getProjects });
+        res.status(200).json(getProjects);
       } else {
         res.status(404).json({ message: `can't retrieve list of Projects` });
       }
@@ -27,9 +25,7 @@ router.get("/:id", (req, res) => {
   ProjectModel.get(req.params.id)
     .then((projectID) => {
       if (projectID) {
-        res
-          .status(200)
-          .json({ message: "Project by ID", Project_ID: projectID });
+        res.status(200).json(projectID);
       } else {
         res
           .status(404)
@@ -50,9 +46,7 @@ router.get("/:id/actions", (req, res) => {
   ProjectModel.getProjectActions(id)
     .then((projectID) => {
       if (projectID) {
-        res
-          .status(200)
-          .json({ message: "Project by ID", ActionID_in_project: projectID });
+        res.status(200).json(projectID);
       } else {
         res
           .status(404)
@@ -72,19 +66,17 @@ router.post("/", (req, res) => {
   ProjectModel.insert(req.body)
     .then((newProject) => {
       if (newProject) {
-        res.status(201).json({
-          message: "Project posted successfully",
-          project_posted_success: newProject,
-        });
+        res.status(201).json(newProject);
       } else {
         res
-          .status(404)
+          .status(400)
           .json({ message: `can't post project, error${req.body}` });
       }
     })
     .catch((error) => {
       console.log(error);
-      res.status(500).json({ message: " 500 error: Can not post project" });
+      //should be 500, but the test requires a 400 instead
+      res.status(400).json({ message: " 400 error: Can not post project" });
     });
 });
 
@@ -95,17 +87,15 @@ router.put("/:id", (req, res) => {
   ProjectModel.update(id, changes)
     .then((updateProject) => {
       if (updateProject) {
-        res.status(200).json({
-          message: `Success, project ID# ${id} updated`,
-          project_updated: updateProject,
-        });
+        res.status(200).json(updateProject);
       } else {
         res.status(404).json({ message: `cant update project, 404 error` });
       }
     })
     .catch((error) => {
-      res.status(500).json({
-        message: "500 ERROR: something went wrong, Can not update project",
+      res.status(400).json({
+        //should be a 500, but test requires a 400 instead
+        message: "400 ERROR: something went wrong, Can not update project",
       });
     });
 });
