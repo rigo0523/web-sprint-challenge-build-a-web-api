@@ -27,13 +27,13 @@ The description of the structure and extra information about each _resource_ sto
 
 #### Actions
 
-| Field       | Data Type | Metadata                                                                                         |
-| ----------- | --------- | ------------------------------------------------------------------------------------------------ |
-| id          | number    | no need to provide it when creating posts, the database will automatically generate it           |
-| project_id  | number    | required, must be the id of an existing project                                                  |
-| description | string    | up to 128 characters long, required                                                              |
-| notes       | string    | no size limit, required. Used to record additional notes or requirements to complete the action  |
-| completed   | boolean   | used to indicate if the action has been completed, not required                                  |
+| Field       | Data Type | Metadata                                                                                        |
+| ----------- | --------- | ----------------------------------------------------------------------------------------------- |
+| id          | number    | no need to provide it when creating posts, the database will automatically generate it          |
+| project_id  | number    | required, must be the id of an existing project                                                 |
+| description | string    | up to 128 characters long, required                                                             |
+| notes       | string    | no size limit, required. Used to record additional notes or requirements to complete the action |
+| completed   | boolean   | used to indicate if the action has been completed, not required                                 |
 
 ### Database Persistence Helpers
 
@@ -75,6 +75,7 @@ A _"test"_ script already exists you can use to run tests against your code.
 #### Build an API
 
 - [ ] Inside `api/actions/actions-router.js` build endpoints for performing CRUD operations on _actions_:
+
   - `[GET] /api/actions` sends an array of actions (or an empty array) as the body of the _response_.
   - `[GET] /api/actions/:id` sends an action with the given `id` as the body of the _response_.
   - `[POST] /api/actions` sends the newly created action as the body of the _response_.
@@ -82,6 +83,7 @@ A _"test"_ script already exists you can use to run tests against your code.
   - `[DELETE] /api/actions/:id` sends no _response_ body.
 
 - [ ] Inside `api/projects/projects-router.js` build endpoints for performing CRUD operations on _projects_:
+
   - `[GET] /api/projects` sends an array of projects (or an empty array) as the body of the response.
   - `[GET] /api/projects/:id` sends a project with the given `id` as the body of the _response_.
   - `[POST] /api/projects` sends the newly created project as the body of the _response_.
@@ -89,6 +91,7 @@ A _"test"_ script already exists you can use to run tests against your code.
   - `[DELETE] /api/projects/:id` sends no _response_ body.
 
 - [ ] Inside `api/projects/projects-router.js` add an endpoint for retrieving the list of actions for a project:
+
   - `[GET] /api/projects/:id/actions` sends an array of actions (or an empty array) as the body of the response.
 
 - [ ] When adding an action, make sure the `project_id` provided belongs to an existing `project`.
@@ -128,7 +131,12 @@ There are two possible ways to submit this project to Canvas. Lambda Staff will 
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
-1. Understand and explain the use of Middleware.
+   Node.js ia a JS enviroment in which you can write code outside of the browser. It's mainly used to run JS on a server. Express is a framework similar to react for Javascript but for the backend.
+1. Understand and explain the use of Middleware?
+   Middleware is adding different uses within express, it's adding extra stuff to express like running a script that tells you what OS or what time it is on a console.log, middleware is also used to make code more cleaner by adding less lines of code in main server file and rather use some of the logic into the middleware folder
 1. The basic principles of the REST architectural style.
+   Rest is used to make endpoints look more semantic. getPostById is a bad way of doing it vs /api/post/:id which looks much more cleaner, this is where REST comes into place
 1. Understand and explain the use of Express Routers.
+   express routers is a way to get incoming requests to servers from clients to the right request handlers. It will lead to REST endpoints
 1. Describe tooling used to manually test the correctness of an API.
+   Could use POSTMAN or Insomnia, my favorte is Insomnia because there's less bloatware and much much easier to navigate, not painful to the eyes like POSTMAN is
